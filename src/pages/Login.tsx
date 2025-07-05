@@ -1,23 +1,38 @@
-import styled from "styled-components";
-
-const LoginArea = styled.div`
-    background: #666;
-`
-
-const LoginImage = styled.div`
-    background-image: url(/login-image.svg);
-    background-size: cover;
-    height: 100vh;
-    width: 50vw;
-`
+import { Box, Container, Grid } from "@mui/material";
+import { BannerImage } from "@/components";
 
 function Login() {
   return (
     <>
-      <LoginArea>LOGIN</LoginArea>
-      <LoginImage />
+      <Box>
+        <Grid container>
+          <Grid 
+            container
+            sx={{
+              flexDirection: { xs: 'column', sm: 'row' }, // exemplo de responsividade
+              alignItems: 'center',
+              display: 'flex',
+              height: '100vh',
+              width: '50vw'
+              // aqui você pode definir tamanhos usando flexbox ou outras propriedades
+            }}
+          >
+            <Container maxWidth="sm">
+              <h1>LOGIN</h1>
+            </Container>
+          </Grid>
+          <Grid
+            sx={{
+              display: 'block',
+              flexBasis: { xs: '100%', sm: '50%' },
+            }}
+          >
+            <BannerImage />
+          </Grid>
+        </Grid>
+      </Box>
     </>
-  )
+  );
 }
 
-export default Login
+export default Login;
