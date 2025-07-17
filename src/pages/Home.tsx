@@ -1,10 +1,10 @@
-import { Header } from '@/components'
+import { CardComponent, Header } from '@/components'
 
 function Home() {
   return (
     <>
       <Header />
-      <h1>HOME</h1>
+      <CardComponent className="success">Card</CardComponent>
     </>
   )
 }
