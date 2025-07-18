@@ -1,15 +1,22 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Avatar, Box, Container } from '@mui/material'
+
+import { Logo } from '@/components'
+
+// MUI
+import Avatar from '@mui/material/Avatar'
+import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
+
+// UTILS
 import { pxToRem } from '@/utils'
-import { Logo } from './Logo'
 
 const StyledHeader = styled.header`
-  background-image: ${(props) => props.theme.appBackground};
-  border-bottom: ${pxToRem(1)} solid ${({ theme }) => theme.appDefaultStroke};
-  margin-bottom: ${pxToRem(37)};
+  background-color: ${(props) => props.theme.appBackground};
+  border-bottom: ${pxToRem(1)} solid ${(props) => props.theme.appDefaultStroke};
   width: 100%;
 `
+
 function Header() {
   return (
     <StyledHeader>
