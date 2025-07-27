@@ -5,13 +5,7 @@ import Cookies from 'js-cookie'
 
 // COMPONENTS
 import { Box, Container, Grid } from '@mui/material'
-import {
-  BannerImage,
-  FormComponent,
-  Logo,
-  StyledH1,
-  StyledP,
-} from '@/components'
+import { BannerImage, FormComponent, StyledH1, StyledP } from '@/components'
 
 // HOOKS
 import { useFormValidation, usePost } from '@/hooks'
@@ -20,7 +14,7 @@ import { useFormValidation, usePost } from '@/hooks'
 import { jwtExpirationDateConverter, pxToRem } from '@/utils'
 
 //TYPES
-import { DecodedJWT, LoginData, LoginPostData, MessageProps } from '@/types'
+import { DecodedJWT, MessageProps } from '@/types'
 
 function Login() {
   const navigate = useNavigate()
@@ -28,9 +22,7 @@ function Login() {
     { type: 'email', placeholder: 'Email' },
     { type: 'password', placeholder: 'Senha' },
   ]
-  const { data, loading, error, postData } = usePost<LoginData, LoginPostData>(
-    'login'
-  )
+  const { data, loading, error, postData } = usePost('login')
   const { formValues, formValid, handleChange } = useFormValidation(inputs)
 
   const handleMessage = (): MessageProps => {
@@ -105,7 +97,7 @@ function Login() {
                     children: loading ? 'Aguarde...' : 'Login',
                   },
                 ]}
-                message={handleMessage}
+                message={handleMessage()}
               />
             </Container>
           </Grid>
