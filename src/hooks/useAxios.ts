@@ -1,5 +1,44 @@
-import { useState } from 'react'
+
+import Cookies from 'js-cookie'
+import { useState, useEffect } from 'react'
 import axios, { AxiosRequestConfig } from 'axios'
+
+export const useGet = <T>(
+  endpoint: string,
+  params: Record<string, any> = {}
+) => {
+  const [data, setData] = useState<T | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const getData = async () => {
+      setLoading(true)
+      setError(null)
+
+      try {
+        const config: AxiosRequestConfig = {
+          headers: { Authorization: `Bearer ${Cookies.get('Authorization')}` },
+          params,
+        }
+
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/${endpoint}`,
+          config
+        )
+        setData(response.data)
+      } catch (e: any) {
+        setError(e.response?.status ?? 500)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    getData()
+  }, [])
+
+  return { data, loading, error }
+}
 
 export const usePost = (endpoint: string) => {
   const [data, setData] = useState<any>(null)
